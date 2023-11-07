@@ -1,0 +1,51 @@
+import time
+import sys
+
+# Non-recursive Fibonacci sequence
+def fibonacci_sequence(n):
+    n1, n2 = 0, 1
+    result = [n1, n2]
+
+    while n > 2:
+        c = n1 + n2
+        n1, n2 = n2, c
+        result.append(c)
+        n -= 1
+
+    return result
+
+# Recursive Fibonacci sequence
+def fibonacci_recursive(n):
+    if n <= 1:
+        return [1] * (n + 1)
+    else:
+        result = [1] * (n + 1)
+        for i in range(2, n + 1):
+            result[i] = result[i - 1] + result[i - 2]
+        return result
+
+n = int(input("Enter the number of terms: "))
+
+# Measure time complexity for non-recursive
+start_time = time.time()
+sequence_non_recursive = fibonacci_sequence(n)
+end_time = time.time()
+execution_time_non_recursive = end_time - start_time
+
+# Measure time complexity for recursive
+start_time = time.time()
+sequence_recursive = fibonacci_recursive(n)
+end_time = time.time()
+execution_time_recursive = end_time - start_time
+
+# Measure space complexity
+size_of_sequence_non_recursive = sys.getsizeof(sequence_non_recursive)
+size_of_sequence_recursive = sys.getsizeof(sequence_recursive)
+
+print("Non-Recursive Fibonacci Sequence:", sequence_non_recursive)
+print("Non-Recursive Execution Time:", execution_time_non_recursive, "seconds")
+print("Non-Recursive Space Complexity:", size_of_sequence_non_recursive, "bytes")
+
+print("Recursive Fibonacci Sequence:", sequence_recursive)
+print("Recursive Execution Time:", execution_time_recursive, "seconds")
+print("Recursive Space Complexity:", size_of_sequence_recursive, "bytes")
